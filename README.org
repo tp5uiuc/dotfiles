@@ -1,0 +1,5 @@
+* Dotfiles star:
+  Configuration files for *sh, tmux and more...
+
+
+  These are my personal dotfiles. Hopefully they grow with time :)
