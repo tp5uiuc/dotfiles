@@ -1,4 +1,4 @@
-* Dotfiles star:
+* Dotfiles :star:
   Configuration files for *sh, tmux and more...
 
 

@@ -1,0 +1,124 @@
+#### GENERAL
+
+# Use Ctrl+A as the prefix key
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+set -g mouse on # enable mouse (tmux 2.1+)
+set -g history-limit 5000 # lines to keep in hisoty
+set -g base-index 1 # start window numbering at 1
+set -g pane-base-index 1 # start pane numbering at 1
+set -g renumber-windows on # renumber windows automatically
+setw -g automatic-rename on  # rename window after process
+set-option -sg escape-time 0 # speed up commands
+setw -g mode-keys vi # Use vi shortcuts
+
+# Allows us to use C-a a <command> to send commands to a TMUX session inside 
+# another TMUX session
+bind-key a send-prefix
+
+# Make `Ctrl+A R` reload the config file
+unbind R
+bind R source-file ~/.tmux.conf \; display "~/.tmux.conf reloaded"
+
+#####################################
+#### NAVIGATION
+#####################################
+
+# With C-a prefix
+bind h select-pane -L                   # navigate left with <C-a>h
+bind j select-pane -D                   # navigate down with <C-a>j
+bind k select-pane -U                   # navigate up with <C-a>k
+bind l select-pane -R                   # navigate right with <C-a>l
+bind -r H resize-pane -L 5                 # resize pane left with <C-a>H
+bind -r J resize-pane -D 5                 # resize pane down with <C-a>J
+bind -r K resize-pane -U 5                 # resize pane up with <C-a>K
+bind -r L resize-pane -R 5                 # resize pane right with <C-a>L
+
+# P for previous makes sense
+# unbind p
+# bind p previous-window
+
+#####################################
+#### SPLITTING
+#####################################
+# split panes using | and -, make sure they open in the same path
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+unbind '"'
+unbind %
+
+# open new windows in the current path
+bind c new-window -c "#{pane_current_path}"
+
+#####################################
+#### APPEARANCE
+#####################################
+
+set -g default-terminal "screen-256color" # use 256 colors
+setw -g aggressive-resize on # resize window to smallest client
+
+# Highlight active window to red
+set-window-option -g window-status-current-bg red
+
+#####################################
+#### CLIPBOARD
+#####################################
+
+# enable reattach-to-user-namespace which fixes pasteboard access and launchctl 
+bind Space copy-mode                       # enter copy mode with <C-a><Space>
+bind -n M-u copy-mode                      # enter copy mode with M-u
+bind -T copy-mode-vi M-u send -X halfpage-up    # scroll up with M-u
+bind -T copy-mode-vi M-d send -X halfpage-down  # scroll down with M-d
+bind -T copy-mode-vi v send -X begin-selection  # start "visual" with v
+bind -T copy-mode-vi V send -X select-line;
+bind -T copy-mode-vi 'r' send -X rectangle-toggle;
+
+# Copy (yank) with y
+if-shell 'uname | grep -qi Linux && which xclip > /dev/null' 'bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "DISPLAY=:0 xclip -i -sel clipboard"'
+if-shell 'uname | grep -qi Darwin' 'bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"'
+if-shell 'uname | grep -qi Cygwin' 'bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "cat > /dev/clipboard"'
+
+# Paste with C-a p or M-p
+if-shell 'uname | grep -qi Linux && which xclip > /dev/null' 'bind p run "DISPLAY=:0 xclip -o | tmux load-buffer - ; tmux paste-buffer"'
+if-shell 'uname | grep -qi Darwin && which reattach-to-user-namespace > /dev/null' 'bind p run "pbpaste | tmux load-buffer - ; tmux paste-buffer"'
+if-shell 'uname | grep -qi Darwin' 'bind -n M-p run "pbpaste | tmux load-buffer - ; tmux paste-buffer"'
+if-shell 'uname | grep -qi Cygwin' 'bind p run "cat /dev/clipboard | tmux load-buffer - ; tmux paste-buffer"'
+if-shell 'uname | grep -qi Cygwin' 'bind -n M-p run "cat /dev/clipboard | tmux load-buffer - ; tmux paste-buffer"'
+
+#####################################
+#### PLUGINS
+#####################################
+# List of plugins
+
+# tpm plugin manager
+# https://github.com/tmux-plugins/tpm 
+set -g @plugin 'tmux-plugins/tpm'
+
+# tmux-resurrect - save and reload sessions and windows after a restart
+# https://github.com/tmux-plugins/tmux-resurrect
+# Default keybinds : save - command + c + s && restore command + c + r
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+# keep vim sessions after reboot
+# set -g @resurrect-strategy-vim 'session'
+# keep pane contents
+set -g @resurrect-capture-pane-contents 'on'
+# restore bash history
+set -g @resurrect-save-bash-history 'on'
+
+
+# tmux-continuum - automatically save and restore tmux sessions
+set -g @plugin 'tmux-plugins/tmux-continuum'
+# Restore last saved enviroment
+set -g @continuum-restore 'on'
+# Set autosave interval
+set -g @continuum-save-interval '5'
+# Show continiuum state in statusbar
+#set -g status-right 'Continuum status: #{continuum_status}'
+# Starting tmux with system https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm' 
