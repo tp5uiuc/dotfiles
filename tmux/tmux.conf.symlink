@@ -60,8 +60,29 @@ bind c new-window -c "#{pane_current_path}"
 set -g default-terminal "screen-256color" # use 256 colors
 setw -g aggressive-resize on # resize window to smallest client
 
+# Default background
+set -g status-bg default 
 # Highlight active window to red
-set-window-option -g window-status-current-bg red
+# set-window-option -g window-status-current-bg red
+
+# alignment settings
+set-option -g status-justify left
+
+# Left status displays the session
+set-option -g status-left '#[fg=green][#[fg=cyan]#S#[fg=green]]'
+# Status bar colors and format
+setw -g window-status-separator '#[fg=white] | #[fg=default]'
+setw -g window-status-format '#[fg=white]#I:#W'
+setw -g window-status-current-format '#[fg=cyan] #I:#W#F'
+# setw -g window-status-format '#[fg=cyan,dim]#I#[fg=blue]:#[default]#W#[fg=grey,dim]#F'
+# setw -g window-status-current-format '#[bg=blue,fg=cyan,bold]#I#[bg=blue,fg=cyan]:#[fg=colour230]#W#[fg=dim]#F'
+
+# status right options
+set -g status-right '#[fg=green][#[fg=blue]%d-%m #[fg=white]| %H:%M#[fg=green]]'
+
+# Panes
+set -g pane-border-style fg=colour238            # border color for inactive panes
+set -g pane-active-border-style fg=colour247     # border color for active panes
 
 #####################################
 #### CLIPBOARD

@@ -9,7 +9,7 @@
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
 	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
-	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+	# di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
 	# Pull in remote changes for the current repository and all its submodules
 	p = !"git pull; git submodule foreach git pull origin master"
@@ -21,7 +21,7 @@
 	ca = !git add -A && git commit -av
 
 	# Switch to a branch, creating it if necessary
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	# go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
 	# Show verbose output about tags, branches or remotes
 	tags = tag -l
@@ -31,53 +31,117 @@
 	# List aliases
 	aliases = config --get-regexp alias
 
-	co = checkout
-	count = shortlog -sn
-	g = grep --break --heading --line-number
-	gi = grep --break --heading --line-number -i
-	changed = show --pretty=\"format:\" --name-only
-	fm = fetch-merge
-	pr = open-pr
-	please = push --force-with-lease
-	commend = commit --amend --no-edit
-	fpr = fetch-pr
-	lt = log --tags --decorate --simplify-by-decoration --oneline
-[difftool "diffmerge"]
-	cmd = diffmerge $LOCAL $REMOTE
-[color]
-	diff = auto
-	status = auto
-	branch = auto
-	ui = true
-[core]
-	excludesfile = ~/.gitignore
-	editor = vim
-	compression = -1
-	autocrlf = input
-	whitespace = trailing-space,space-before-tab
-	precomposeunicode = true
+	# Find branches containing commit
+	fb = "!f() { git branch -a --contains $1; }; f"
+
+	# Find tags containing commit
+	ft = "!f() { git describe --always --contains $1; }; f"
+
+	# Find commits by source code
+	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
 [apply]
-	whitespace = nowarn
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
+
+[color]
+	ui = true
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[commit]
+	# https://help.github.com/articles/signing-commits-using-gpg/
+	# Has never worked for me, so setting to false
+	gpgsign = false
+
+	# Default template to follow
+	template = ~/.dotfiles/git/template.txt
+
+[core]
+	# Global gitignore
+	excludesfile = ~/.gitignore
+
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+	# Make `git rebase` safer on macOS
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+
+	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
+	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+	precomposeunicode = false
+
+	# To handle line endings properly
+	# Got from http://gitimmersion.com/lab_01.html
+	# Might not be a great idea https://stackoverflow.com/a/2825829
+	# autocrlf = input
+
+	# Default editor for commits
+	editor = vim
+
+	# Use default zlib to compress files
+	compression = -1
+
+[diff]
+	# Detect copies as well as renames
+	renames = copies
+	# Enable an experimental heuristic that shifts the hunk boundary in an
+	# attempt to make the resulting patch easier to read.
+	indentHeuristic = true
+
+[diff "bin"]
+	# Use `hexdump` to diff binary files
+	textconv = hexdump -v -C
+
+[gpg]
+	program = gpg
+
+[grep]
+	extendRegexp = true
+	lineNumber = true
+
 [help]
+	# Automatically correct and execute mistyped commands
 	autocorrect = 1
+
 [merge]
-	tool = diffmerge
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
+
 [mergetool "diffmerge"]
 	cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
 	trustExitCode = true
 	keepBackup = false
-[diff]
-	tool = diffmerge
-[difftool]
-	prompt = false
-[grep]
-	extendRegexp = true
-	lineNumber = true
+
 [push]
+	# `git config --global push.default simple`. See http://git.io/mMah-w.
 	default = simple
+
+	# Make `git push` push relevant annotated tags when pushing branches out.
+	followTags = true
+
 [submodule]
 	fetchJobs = 4
-[commit]
-	template = ~/.dotfiles/git/template.txt
+
 [log]
 	showSignature = false
