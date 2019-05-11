@@ -1,18 +1,24 @@
+#####################################
 #### GENERAL
-
-# Use Ctrl+A as the prefix key
-unbind C-b
-set-option -g prefix C-a
-bind-key C-a send-prefix
-
+#####################################
 set -g mouse on # enable mouse (tmux 2.1+)
 set -g history-limit 5000 # lines to keep in hisoty
 set -g base-index 1 # start window numbering at 1
 set -g pane-base-index 1 # start pane numbering at 1
 set -g renumber-windows on # renumber windows automatically
 setw -g automatic-rename on  # rename window after process
-set-option -sg escape-time 0 # speed up commands
-setw -g mode-keys vi # Use vi shortcuts
+set-option -sg escape-time 1 # decrease time before another command
+
+#####################################
+#### KEYBINDINGS
+#####################################
+# Use Ctrl+A as the prefix key
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# Use vi shortcuts
+setw -g mode-keys vi
 
 # Allows us to use C-a a <command> to send commands to a TMUX session inside 
 # another TMUX session
@@ -25,7 +31,6 @@ bind R source-file ~/.tmux.conf \; display "~/.tmux.conf reloaded"
 #####################################
 #### NAVIGATION
 #####################################
-
 # With C-a prefix
 bind h select-pane -L                   # navigate left with <C-a>h
 bind j select-pane -D                   # navigate down with <C-a>j
@@ -47,6 +52,7 @@ bind -r L resize-pane -R 5                 # resize pane right with <C-a>L
 bind | split-window -h -c "#{pane_current_path}"
 bind - split-window -v -c "#{pane_current_path}"
 
+# unbind the default keys for splitting
 unbind '"'
 unbind %
 
@@ -56,7 +62,6 @@ bind c new-window -c "#{pane_current_path}"
 #####################################
 #### APPEARANCE
 #####################################
-
 set -g default-terminal "screen-256color" # use 256 colors
 setw -g aggressive-resize on # resize window to smallest client
 
@@ -70,15 +75,21 @@ set-option -g status-justify left
 
 # Left status displays the session
 set-option -g status-left '#[fg=green][#[fg=cyan]#S#[fg=green]]'
+#                            current session name─┘
+
+
 # Status bar colors and format
 setw -g window-status-separator '#[fg=white] | #[fg=default]'
 setw -g window-status-format '#[fg=white]#I:#W'
+#                      current pane index─┘  └─ current window name
 setw -g window-status-current-format '#[fg=cyan] #I:#W#F'
+#                                  current window flag─┘
 # setw -g window-status-format '#[fg=cyan,dim]#I#[fg=blue]:#[default]#W#[fg=grey,dim]#F'
 # setw -g window-status-current-format '#[bg=blue,fg=cyan,bold]#I#[bg=blue,fg=cyan]:#[fg=colour230]#W#[fg=dim]#F'
 
 # status right options
 set -g status-right '#[fg=green][#[fg=blue]%d-%m #[fg=white]| %H:%M#[fg=green]]'
+#                               current date─┘     current time─┘
 
 # Panes
 set -g pane-border-style fg=colour238            # border color for inactive panes
@@ -87,8 +98,6 @@ set -g pane-active-border-style fg=colour247     # border color for active panes
 #####################################
 #### CLIPBOARD
 #####################################
-
-# enable reattach-to-user-namespace which fixes pasteboard access and launchctl 
 bind Space copy-mode                       # enter copy mode with <C-a><Space>
 bind -n M-u copy-mode                      # enter copy mode with M-u
 bind -T copy-mode-vi M-u send -X halfpage-up    # scroll up with M-u
@@ -97,6 +106,7 @@ bind -T copy-mode-vi v send -X begin-selection  # start "visual" with v
 bind -T copy-mode-vi V send -X select-line;
 bind -T copy-mode-vi 'r' send -X rectangle-toggle;
 
+# enable reattach-to-user-namespace which fixes pasteboard access and launchctl on Mac 
 # Copy (yank) with y
 if-shell 'uname | grep -qi Linux && which xclip > /dev/null' 'bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "DISPLAY=:0 xclip -i -sel clipboard"'
 if-shell 'uname | grep -qi Darwin' 'bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"'
@@ -112,8 +122,6 @@ if-shell 'uname | grep -qi Cygwin' 'bind -n M-p run "cat /dev/clipboard | tmux l
 #####################################
 #### PLUGINS
 #####################################
-# List of plugins
-
 # tpm plugin manager
 # https://github.com/tmux-plugins/tpm 
 set -g @plugin 'tmux-plugins/tpm'
@@ -122,14 +130,12 @@ set -g @plugin 'tmux-plugins/tpm'
 # https://github.com/tmux-plugins/tmux-resurrect
 # Default keybinds : save - command + c + s && restore command + c + r
 set -g @plugin 'tmux-plugins/tmux-resurrect'
-
 # keep vim sessions after reboot
 # set -g @resurrect-strategy-vim 'session'
 # keep pane contents
 set -g @resurrect-capture-pane-contents 'on'
 # restore bash history
 set -g @resurrect-save-bash-history 'on'
-
 
 # tmux-continuum - automatically save and restore tmux sessions
 set -g @plugin 'tmux-plugins/tmux-continuum'
@@ -138,7 +144,7 @@ set -g @continuum-restore 'on'
 # Set autosave interval
 set -g @continuum-save-interval '20'
 # Show continiuum state in statusbar
-#set -g status-right 'Continuum status: #{continuum_status}'
+# set -g status-right 'Continuum status: #{continuum_status}'
 # Starting tmux with system https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
