@@ -1,0 +1,4 @@
+* TODO Flake8
+* TODO Cppcheck
+* TODO Clangformat
+* TODO Clangtidy
