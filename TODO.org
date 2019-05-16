@@ -1,0 +1,20 @@
+* Global Todo
+
+** Dotfiles
+*** TODO nvimrc as main
+*** TODO vimrc minimal, quick editing
+*** TODO zsh port
+*** TODO proselint
+*** TODO academiclint
+*** TODO ccache
+*** TODO ssh
+** Machine
+*** TODO Fzf, the fuzzy file finder
+*** TODO Fasd, like z but better : https://github.com/clvv/fasd
+*** TODO Bat : replace cat: https://github.com/sharkdp/bat
+*** TODO Fd: replacement for find : https://github.com/sharkdp/fd
+*** TODO tldr: for quick syntax and man pages, don't use howdoi anymore cause slow:
+	https://github.com/tldr-pages/tldr
+*** TODO Mosh, replacement for ssh, especially in India
+*** proselint : http://proselint.com/
+*** academiclint : https://github.com/devd/Academic-Writing-Check
