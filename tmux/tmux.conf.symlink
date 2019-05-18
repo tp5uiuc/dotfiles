@@ -74,13 +74,13 @@ set -g status-bg default
 set-option -g status-justify left
 
 # Left status displays the session
-set-option -g status-left '#[fg=green][#[fg=cyan]#S#[fg=green]]'
+set-option -g status-left '#[fg=yellow][#[fg=cyan]#S#[fg=yellow]]'
 #                            current session name─┘
-
+set -g status-left-length 30
 
 # Status bar colors and format
-setw -g window-status-separator '#[fg=white] | #[fg=default]'
-setw -g window-status-format '#[fg=white]#I:#W'
+setw -g window-status-separator '#[fg=colour245] | #[fg=default]'
+setw -g window-status-format '#[fg=colour245]#I:#W'
 #                      current pane index─┘  └─ current window name
 setw -g window-status-current-format '#[fg=cyan] #I:#W#F'
 #                                  current window flag─┘
@@ -88,7 +88,7 @@ setw -g window-status-current-format '#[fg=cyan] #I:#W#F'
 # setw -g window-status-current-format '#[bg=blue,fg=cyan,bold]#I#[bg=blue,fg=cyan]:#[fg=colour230]#W#[fg=dim]#F'
 
 # status right options
-set -g status-right '#[fg=green][#[fg=blue]%d-%m #[fg=white]| %H:%M#[fg=green]]'
+set -g status-right '#[fg=yellow][#[fg=colour255]%d-%m #[fg=colour245]| %H:%M#[fg=yellow]]'
 #                               current date─┘     current time─┘
 
 # Panes
