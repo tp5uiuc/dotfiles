@@ -18,3 +18,4 @@
 *** TODO Mosh, replacement for ssh, especially in India
 *** proselint : http://proselint.com/
 *** academiclint : https://github.com/devd/Academic-Writing-Check
+*** latexpl : Don't worry about formatting latex https://github.com/cmhughes/latexindent.pl
