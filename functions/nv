@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+# `v` with no arguments opens the current directory in Vim, otherwise opens the
+# given location
+
+
+function nv() {
+    local cmd="";
+	if hash nim 2> /dev/null; then
+	  cmd="nvim";
+	else
+	  cmd="vim";
+	fi;
+
+	if [ $# -eq 0 ]; then
+		${cmd}  .;
+	else
+		${cmd} "$@";
+	fi;
+}
+
+# nv "$@"

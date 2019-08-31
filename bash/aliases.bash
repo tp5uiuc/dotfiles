@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Bash specific aliases
+# bash specific aliases
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."

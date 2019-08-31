@@ -48,6 +48,9 @@ case $(uname -s) in
   'Linux')
 	alias emptytrash='rm -rf ~/.local/share/Trash/*'
 
+	# Mimics OSX's open
+	alias open='xdg-open '
+
     ;;
   'Darwin')
 	# Recursively delete `.DS_Store` files

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Not a sh because OSTYPE, "${@: -1}" are bash/zsh specific
+
+# Merge PDF files
+# Usage: `mergepdf input{1,2,3}.pdf output.pdf`
+function mergepdf() {
+  case $(uname -s) in
+	'Linux')
+	  pdfunite "$@";
+    ;;
+	'Darwin')
+	  local arg_arr=($@)
+	  /System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py -o "${arg_arr[@]: -1}" -i "${arg_arr[@]: :${#arg_arr[@]}-1}"
+	;;
+  esac
+}

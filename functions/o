@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+# `o` with no arguments opens the current directory, otherwise opens the given
+# location
+
+# Assumes the alias open is set in Linux to xdg-open (see aliases.sh)
+function o() {
+	if [ $# -eq 0 ]; then
+		open .;
+	else
+		open "$@";
+	fi;
+}
+
+# o "$@"
