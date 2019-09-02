@@ -12,9 +12,12 @@ config_files=($DOTFILES/**/*.?(ba)sh)
 # path files separately
 # load the path files
 path_files=($DOTFILES/**/path.?(ba)sh)
+# echo "${path_files[@]}"
+
 for path_file in ${path_files[@]}; do
   [[ -r "$path_file" && -f "$path_file" ]] && source "$path_file";
 done;
+
 unset path_files path_file
 # echo "echoed pathfiles"
 
@@ -26,7 +29,13 @@ for other_file in ${other_files[@]}; do
   [[ -r "$other_file" && -f "$other_file" ]] && source "$other_file";
 done;
 unset other_files other_file
-# echo "echoed otherfiles"
+
+# load all the function files
+function_files=($DOTFILES/functions/*)
+for function_file in ${function_files[@]}; do
+  [[ -r "$function_file" && -f "$function_file" ]] && source "$function_file";
+done;
+unset function_files function_file
 
 # Be a good boy and unset
 shopt -u extglob;

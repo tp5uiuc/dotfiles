@@ -1,4 +1,8 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
+
+# # uncomment this and the last line for zprof info
+# zmodload zsh/zprof
+
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES="$HOME/.dotfiles"
 
@@ -15,20 +19,20 @@ for file in ${(M)config_files:#*/path.?(z)sh}; do
 done
 
 # # load antibody plugins
-# source ~/.zsh_plugins.sh
+source ~/.zsh_plugins.sh
 
 # load everything but the path, install and completion files
 for file in ${${${config_files:#*/path.?(z)sh}:#*/completion.zsh}:#*/install.sh}; do
   source "$file"
 done
 
-# autoload -Uz compinit
-# typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
-# if [ $(date +'%j') != $updated_at ]; then
-#   compinit -i
-# else
-#   compinit -C -i
-# fi
+autoload -Uz compinit
+typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+if [ $(date +'%j') != $updated_at ]; then
+  compinit -i
+else
+  compinit -C -i
+fi
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}; do
@@ -44,3 +48,5 @@ setopt +o KSH_GLOB;
 # want in your public, versioned repo.
 # shellcheck disable=SC1090
 [ -f ~/.localrc ] && . ~/.localrc
+
+# zprof
