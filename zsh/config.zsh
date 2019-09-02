@@ -18,7 +18,7 @@ setopt AUTO_CD
 # set globbing to be case-insensitive
 setopt NO_CASE_GLOB
 # set extended globbing like bash
-setopt KSH_GLOB;
+setopt KSH_GLOB
 # don't nice background tasks
 setopt NO_BG_NICE
 # don't send hup when shell exists
