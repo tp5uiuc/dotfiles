@@ -79,7 +79,8 @@ case $(uname -s) in
 
 	# Merge PDF files
 	# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
-	alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+	# alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+	# Recoded as a function to accomodate Linux systems
 
     ;;
 esac
