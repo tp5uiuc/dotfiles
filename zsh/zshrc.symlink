@@ -8,10 +8,10 @@ setopt -o KSH_GLOB;
 # all of our sh/zsh files
 typeset -U config_files
 config_files=($DOTFILES/*/*.?(z)sh)
-echo "${config_files[@]}"
+# echo "${config_files[@]}"
 # load the path files
 for file in ${(M)config_files:#*/path.?(z)sh}; do
-  echo "$file"
+  source "$file"
 done
 
 # # load antibody plugins
@@ -19,7 +19,7 @@ done
 
 # load everything but the path, install and completion files
 for file in ${${${config_files:#*/path.?(z)sh}:#*/completion.zsh}:#*/install.sh}; do
-  echo "$file"
+  source "$file"
 done
 
 # autoload -Uz compinit
@@ -32,7 +32,7 @@ done
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}; do
-  echo "$file"
+  source "$file"
 done
 
 unset config_files updated_at file

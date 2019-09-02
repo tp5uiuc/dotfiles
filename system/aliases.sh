@@ -49,7 +49,19 @@ case $(uname -s) in
 	alias emptytrash='rm -rf ~/.local/share/Trash/*'
 
 	# Mimics OSX's open
-	alias open='xdg-open '
+	if [ -e /usr/bin/xdg-open ]; then
+	  alias open='xdg-open '
+	fi
+
+	if [ -z "$(command -v pbcopy)" ]; then
+	  if [ -n "$(command -v xclip)" ]; then
+		alias pbcopy="xclip -selection clipboard"
+		alias pbpaste="xclip -selection clipboard -o"
+	  elif [ -n "$(command -v xsel)" ]; then
+		alias pbcopy="xsel --clipboard --input"
+		alias pbpaste="xsel --clipboard --output"
+	  fi
+	fi
 
     ;;
   'Darwin')

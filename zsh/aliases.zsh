@@ -2,4 +2,9 @@
 
 # zsh specific aliases
 
-alias reload!='exec "$SHELL" -l'
+# Load help
+autoload -Uz run-help
+# By default, run-help is an alias for man
+unalias run-help
+# Create shell agnostic help
+alias help=run-help
