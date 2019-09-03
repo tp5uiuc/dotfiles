@@ -1,6 +1,17 @@
 #!/usr/bin/env sh
 
 # Shell agnostic aliases
+# Movement
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+# Easy directory change, adapted from https://opensource.com/article/18/9/tips-productivity-zsh
+d='dirs -v | head -10'
+
+# VirtuaCop
 alias reload!='exec "$SHELL" -l'
 
 # Print each PATH entry on a separate line
@@ -36,9 +47,9 @@ alias ls="command ls ${colorflag}"
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
@@ -84,3 +95,7 @@ case $(uname -s) in
 
 	;;
 esac
+
+# mnemonic for copy and Copy
+alias c='pbcopy'
+alias C="tr -d '\n' | pbcopy"
