@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+#
+# Kills coreaudiod on macOS.
+#
+# This fixes the "no sound" issue that happens occasionally.
+#
+if [ "$(uname -s)" = "Darwin" ]; then 
+	sudo pkill coreaudiod
+fi
