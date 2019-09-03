@@ -2,7 +2,7 @@
 
 # setups the auto-update
 (
-  crontab -l | grep -v "dot_update"
+	crontab -l | grep -v "dot_update"
 	#=====================================================================#
 	#     0-23   0-59               0-30  0-6   1-12                      #
 	#     |_    _|                 _|    _|    _|                         #
@@ -17,5 +17,5 @@
 	#=====================================================================#
 	#  Min  |  Hour  |  Mday  |  Month  |  Wday  |  Command               #
 	#=====================================================================#
-  echo "0 0 * * FRI $HOME/.dotfiles/bin/dot_update > ${TMPDIR:-/tmp}/dot_update.log 2>&1"
+	echo "0 0 * * FRI $HOME/.dotfiles/bin/dot_update > ${TMPDIR:-/tmp}/dot_update.log 2>&1"
 ) | crontab -
