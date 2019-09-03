@@ -99,3 +99,6 @@ esac
 # mnemonic for copy and Copy
 alias c='pbcopy'
 alias C="tr -d '\n' | pbcopy"
+
+# some useful cheatsheets
+alias cheattmux='o https://gist.github.com/MohamedAlaa/2961058'
