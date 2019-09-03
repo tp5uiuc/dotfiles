@@ -1,4 +1,4 @@
-#!usr/bin/env sh
+#!/usr/bin/env sh
 export PATH="/usr/local/bin:$PATH:$DOTFILES/bin:$HOME/.bin"
 
 # your project folder that we can `c [tab]` to
