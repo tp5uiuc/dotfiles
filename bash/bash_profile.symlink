@@ -37,6 +37,14 @@ for function_file in ${function_files[@]}; do
 done;
 unset function_files function_file
 
+completion_files=($DOTFILES/**/completion.?(ba)sh)
+
+for completion_file in ${completion_files[@]}; do
+  [[ -r "$completion_file" && -f "$completion_file" ]] && source "$completion_file";
+done;
+
+unset completion_files completion_file
+
 # Be a good boy and unset
 shopt -u extglob;
 
