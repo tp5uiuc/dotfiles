@@ -33,22 +33,46 @@ else # macOS `ls`
 	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
 fi
 
-# List all files colorized in long format
-# shellcheck disable=SC2139
-alias l="ls -lF ${colorflag}"
+if command -v exa >/dev/null 2>&1; then # exa!
+	# exa : b prints filesize in human readable format
+	# exa : h prints header
+	alias ls="command exa"
 
-# List all files colorized in long format, including dot files
-# shellcheck disable=SC2139
-alias la="ls -laF ${colorflag}"
+	# List all files colorized in long format
+	alias l="exa -lbhF --git"
 
-# List only directories
-# shellcheck disable=SC2139
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+	# List all files colorized in long format, including dot files
+	alias la="exa -labhF --git"
 
-# Always use color output for `ls`
-# shellcheck disable=SC2139
-alias ls="command ls ${colorflag}"
+	# List only directories
+	alias lsd="exa -lDF"
 
+	# List nice tree, special exa
+	alias lt='exa -D --tree --level=2'
+else # default to ls
+	# List all files colorized in long format
+	# shellcheck disable=SC2139
+	alias l="ls -lF ${colorflag}"
+
+	# List all files colorized in long format, including dot files
+	# shellcheck disable=SC2139
+	alias la="ls -laF ${colorflag}"
+
+	# List only directories
+	# shellcheck disable=SC2139
+	alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+
+	# Always use color output for `ls`
+	# shellcheck disable=SC2139
+	alias ls="command ls ${colorflag}"
+
+	# List nice tree, no exa
+	if command -v tree >/dev/null 2>&1; then # tree!
+		alias lt='tree -d -L 2'
+	else
+		alias lt='ls'
+	fi
+fi
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
