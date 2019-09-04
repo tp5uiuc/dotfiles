@@ -9,7 +9,7 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Easy directory change, adapted from https://opensource.com/article/18/9/tips-productivity-zsh
-d='dirs -v | head -10'
+alias d='dirs -v | head -10'
 
 # VirtuaCop
 alias reload!='exec "$SHELL" -l'
@@ -34,15 +34,19 @@ else # macOS `ls`
 fi
 
 # List all files colorized in long format
+# shellcheck disable=SC2139
 alias l="ls -lF ${colorflag}"
 
 # List all files colorized in long format, including dot files
+# shellcheck disable=SC2139
 alias la="ls -laF ${colorflag}"
 
 # List only directories
+# shellcheck disable=SC2139
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 
 # Always use color output for `ls`
+# shellcheck disable=SC2139
 alias ls="command ls ${colorflag}"
 
 # Always enable colored `grep` output
@@ -98,7 +102,7 @@ esac
 
 # mnemonic for copy and Copy
 alias c='pbcopy'
-alias C="tr -d '\n' | pbcopy"
+alias C="tr -d '\\n' | pbcopy"
 
 # some useful cheatsheets
 alias cheattmux='o https://gist.github.com/MohamedAlaa/2961058'
