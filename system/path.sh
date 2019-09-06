@@ -1,5 +1,19 @@
 #!/usr/bin/env sh
-export PATH="/usr/local/bin:$PATH:$DOTFILES/bin:$HOME/.bin"
+
+pathmunge() {
+	if ! echo "$PATH" | grep -Eq "(^|:)$1($|:)"; then
+		if [ "$2" = "after" ]; then
+			PATH="$PATH:$1"
+		else
+			PATH="$1:$PATH"
+		fi
+	fi
+}
+
+pathmunge "/usr/local/sbin" after
+pathmunge "/usr/local/bin"
+pathmunge "$DOTFILES/bin"
+export PATH
 
 # your project folder that we can `c [tab]` to
 export PROJECTS="$HOME/code"
