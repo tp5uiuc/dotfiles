@@ -15,7 +15,7 @@ pathmunge "/usr/local/bin"
 pathmunge "$DOTFILES/bin"
 export PATH
 
-# your project folder that we can `c [tab]` to
+# your project folder that we can `p [tab]` to
 export PROJECTS="$HOME/code"
 
 # your default editor

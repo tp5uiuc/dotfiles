@@ -30,8 +30,8 @@ for other_file in ${other_files[@]}; do
 done;
 unset other_files other_file
 
-# load all the function files
-function_files=($DOTFILES/functions/*)
+# load all the function files that doesn't begin with _ (zsh completions)
+function_files=($DOTFILES/functions/!(_*))
 for function_file in ${function_files[@]}; do
   [[ -r "$function_file" && -f "$function_file" ]] && source "$function_file";
 done;
