@@ -15,7 +15,7 @@ cat_hosts() {
 	echo '#DOTFILE_HOSTS#' | cat - /tmp/hosts.d/master.hosts >/etc/hosts && rm -fr /tmp/hosts.d/master.hosts
 }
 
-if ( (EUID)); then
+if [ $(id -u) -eq 0 ]; then
 	# If dotfiles, don't create a backup
 	test "$(head -n1 /etc/hosts)" = '#DOTFILE_HOSTS#' || mv /etc/hosts /etc/hosts.bkup
 	download_hosts
