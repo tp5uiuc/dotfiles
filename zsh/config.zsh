@@ -90,8 +90,11 @@ bindkey '^[[3~' delete-char
 bindkey '^?' backward-delete-char
 
 # delete word with ctrl+backspace
-bindkey '^[[3;5~' backward-delete-word
+# bindkey '^[[3;5~' backward-delete-word
 # bindkey '^[[3~' backward-delete-word
+
+# delete word with alt+backspace
+bindkey '^[^?' backward-delete-word
 
 # search history with fzf if installed, default otherwise
 if test -d /usr/local/opt/fzf/shell; then
@@ -100,3 +103,13 @@ if test -d /usr/local/opt/fzf/shell; then
 else
 	bindkey '^R' history-incremental-search-backward
 fi
+
+# More keybindings parallel to bash
+# https://gist.github.com/ldong/3f52a1b080bac28ffc47b8f8bd3853d1
+
+# cycle through menu completion backwards, was not enabled
+bindkey "\e[Z" reverse-menu-complete # Shift+Tab
+
+# Search history at any point, fzf makes this simpler
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
