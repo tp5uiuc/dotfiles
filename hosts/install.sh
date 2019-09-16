@@ -2,7 +2,8 @@
 
 download_hosts() {
 	BLACK_URL="https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
-	TOPSIFY_URL="https://raw.githubusercontent.com/zackad/dotfiles/master/hosts.d/ads_spotify.conf"
+	# TOPSIFY_URL="https://raw.githubusercontent.com/zackad/dotfiles/master/hosts.d/ads_spotify.conf"
+	TOPSIFY_URL="https://gist.githubusercontent.com/Rootzpower/827603f65c76174ada44031cfade3f5e/raw/daf9f03de4150e762e29deb2a66c509cce90a734/Spotify_hosts_block_ads"
 	mkdir -p /tmp/hosts.d/
 	curl -L -s -o /tmp/hosts.d/steven_black.host "$BLACK_URL"
 	curl -L -s -o /tmp/hosts.d/topsify.host "$TOPSIFY_URL"
@@ -15,7 +16,7 @@ cat_hosts() {
 	echo '#DOTFILE_HOSTS#' | cat - /tmp/hosts.d/master.hosts >/etc/hosts && rm -fr /tmp/hosts.d/master.hosts
 }
 
-if [ $(id -u) -eq 0 ]; then
+if [ "$(id -u)" -eq 0 ]; then
 	# If dotfiles, don't create a backup
 	test "$(head -n1 /etc/hosts)" = '#DOTFILE_HOSTS#' || mv /etc/hosts /etc/hosts.bkup
 	download_hosts
