@@ -82,6 +82,10 @@ alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
+# show weather
+# All the places I have <lived> in starts with a Ch!
+alias weather="curl -s 'wttr.in/{Champaign,Chennai,Chicago}?format=3&m'"
+
 # OS dependent aliases
 case $(uname -s) in
 'Linux')
