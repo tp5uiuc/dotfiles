@@ -4,7 +4,6 @@
 # Merge PDF files
 # Usage: `mergepdf input{1,2,3}.pdf output.pdf`
 function mergepdf() {
-  echo "TEST"
   case $(uname -s) in
 	'Linux')
 	  pdfunite "$@";

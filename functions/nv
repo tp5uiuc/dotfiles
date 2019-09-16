@@ -6,7 +6,7 @@
 
 function nv() {
     local cmd="";
-	if hash nim 2> /dev/null; then
+	if hash nvim 2> /dev/null; then
 	  cmd="nvim";
 	else
 	  cmd="vim";
