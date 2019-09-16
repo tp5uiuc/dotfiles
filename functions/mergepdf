@@ -4,14 +4,14 @@
 # Merge PDF files
 # Usage: `mergepdf input{1,2,3}.pdf output.pdf`
 function mergepdf() {
-  case $(uname -s) in
+	case $(uname -s) in
 	'Linux')
-	  pdfunite "$@";
-    ;;
+		pdfunite "$@"
+		;;
 	'Darwin')
-	  local arg_arr=($@)
-	  # join usage: `join.py -o output.pdf input{1,2,3}.pdf`
-	  /System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py -o "${arg_arr[@]: -1}" "${arg_arr[@]: :${#arg_arr[@]}-1}"
-	;;
-  esac
+		local arg_arr=("$@")
+		# join usage: `join.py -o output.pdf input{1,2,3}.pdf`
+		/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py -o "${arg_arr[@]: -1}" "${arg_arr[@]::${#arg_arr[@]}-1}"
+		;;
+	esac
 }

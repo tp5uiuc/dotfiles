@@ -4,12 +4,12 @@
 # location
 
 # Assumes the alias open is set in Linux to xdg-open (see aliases.sh)
-function o() {
+o() {
 	if [ $# -eq 0 ]; then
-		open .;
+		open .
 	else
-		open "$@";
-	fi;
+		open "$@"
+	fi
 }
 
 # o "$@"

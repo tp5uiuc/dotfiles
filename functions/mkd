@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 # Create a new directory and enter it
-function mkd() {
-	mkdir -p "$@" && cd "$_";
+mkd() {
+	mkdir -p "$@" && cd "$_" || exit
 }
 
 # # Change working directory to the top-most Finder window location

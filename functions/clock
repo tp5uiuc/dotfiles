@@ -1,22 +1,22 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # hides/shows clock from the main menubar
 # Usage: clock show displays clock, clock hide deletes clock
-function clock() {
-  case $(uname -s) in
-	'Linux')
-    ;;
+clock() {
+	case $(uname -s) in
+	'Linux') ;;
+
 	'Darwin')
-	  defaults write com.apple.systemuiserver menuExtras -array \
-		"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-		"/System/Library/CoreServices/Menu Extras/Battery.menu" \
-		"/System/Library/CoreServices/Menu Extras/User.menu"
+		defaults write com.apple.systemuiserver menuExtras -array \
+			"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+			"/System/Library/CoreServices/Menu Extras/Battery.menu" \
+			"/System/Library/CoreServices/Menu Extras/User.menu"
 
-	  if [[ $1 =~ ^([sS][hH][oO][wW]|[yY])$ ]]; then
-		defaults write com.apple.systemuiserver menuExtras -array-add "/System/Library/CoreServices/Menu Extras/Clock.menu"
-	  fi;
+		if [[ "$1" =~ ^([sS][hH][oO][wW]|[yY])$ ]]; then
+			defaults write com.apple.systemuiserver menuExtras -array-add "/System/Library/CoreServices/Menu Extras/Clock.menu"
+		fi
 
-	  killall SystemUIServer -HUP
-	;;
-  esac
+		killall SystemUIServer -HUP
+		;;
+	esac
 }

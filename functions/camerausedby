@@ -3,6 +3,13 @@
 # who is using the laptop's iSight camera?
 camerausedby() {
 	echo "Checking to see who is using the iSight camera… 📷"
-	usedby=$(lsof | grep -w "AppleCamera\|USBVDC\|iSight" | awk '{printf $2"\n"}' | xargs ps)
-	echo -e "Recent camera uses:\n$usedby"
+	case $(uname -s) in
+	'Linux') ;;
+
+	'Darwin')
+		usedby=$(lsof | grep -w "AppleCamera\\|USBVDC\\|iSight" | awk '{printf $2"\n"}' | xargs ps)
+		# usedby=$(lsof | grep -w "AppleCamera\|USBVDC\|iSight" | awk '{printf $2"\n"}' | xargs ps)
+		;;
+	esac
+	printf "Recent camera uses:\\n%s" "$usedby"
 }

@@ -3,11 +3,11 @@
 # Makes a movie from images or another movie
 
 # Usage : mkmovie <ffmpeg_file_format>
-function mkmovie() {
-  if hash ffmpeg 2> /dev/null; then
-  	ffmpeg -framerate 30 -i "$@" -crf 23 -c:v libx264 -pix_fmt yuv420p out_video.mp4 2> /dev/null
-  else
-	echo "mkmovie needs ffmpeg!"
-  fi;
+mkmovie() {
+	if hash ffmpeg 2>/dev/null; then
+		ffmpeg -framerate 30 -i "$@" -crf 23 -c:v libx264 -pix_fmt yuv420p out_video.mp4 2>/dev/null
+	else
+		echo "mkmovie needs ffmpeg!"
+	fi
 
 }

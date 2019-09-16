@@ -2,12 +2,12 @@
 
 # `v` with no arguments opens the current directory in Vim, otherwise opens the
 # given location
-function v() {
+v() {
 	if [ $# -eq 0 ]; then
-		vim .;
+		vim .
 	else
-		vim "$@";
-	fi;
+		vim "$@"
+	fi
 }
 
 # v "$@"
