@@ -33,7 +33,7 @@ else # macOS `ls`
 	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
 fi
 
-if command -v exa >/dev/null 2>&1; then # exa!
+if command -v exa >/dev/null 2>&1; then # exa, a modern version of ls!
 	# exa : b prints filesize in human readable format
 	# exa : h prints header
 	alias ls="command exa"
@@ -78,6 +78,12 @@ fi
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+
+if command -v bat >/dev/null 2>&1; then # bat, the cat clone with wings!
+	# exa : b prints filesize in human readable format
+	# exa : h prints header
+	alias cat="bat"
+fi
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
