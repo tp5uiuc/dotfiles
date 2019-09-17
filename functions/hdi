@@ -6,7 +6,7 @@ hdi() {
 	if hash howdoi 2>/dev/null; then
 		# -c : enable colorized output
 		# -n : limit max search results to 5
-		howdoi "$*" -c -n 5
+		howdoi "$*" -c -n 3 | less -XR
 	else
 		# Relies on the alias open set across systems
 		# See aliases.sh
