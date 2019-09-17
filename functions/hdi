@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# How Do I do something, wraps around the nice howdoi library
+hdi() {
+	# Usage : hdi <search query>
+	if hash howdoi 2>/dev/null; then
+		# -c : enable colorized output
+		# -n : limit max search results to 5
+		howdoi "$*" -c -n 5
+	else
+		# Relies on the alias open set across systems
+		# See aliases.sh
+		local IFS='+' # DDG search needs separation with +
+		open "https://duckduckgo.com/?q=$*&t=ffab&ia=web"
+	fi
+}
