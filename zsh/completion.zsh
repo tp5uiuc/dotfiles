@@ -2,6 +2,9 @@
 # forces zsh to realize new commands
 zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate
 
+# ignore hosts insensitive for lowercase
+zstyle ':completion:*' hosts off
+
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
