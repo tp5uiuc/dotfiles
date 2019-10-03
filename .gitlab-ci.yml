@@ -5,9 +5,9 @@ stages:
 
 linux_build:
   stage: build
-  # before_script:
-  #   - apt-get update >/dev/null
-  #   - apt-get install -y zsh
+  before_script:
+    - apt-get update >/dev/null
+    - apt-get install -y zsh git curl tar make
   script:
     - make ci
   when: always
