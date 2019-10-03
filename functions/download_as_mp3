@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# download mp3s if needed
+function download_as_mp3() {
+	# usage : convert_to_mp3 URL
+	if hash youtube-dl 2>/dev/null; then
+		youtube-dl --extract-audio --audio-format mp3 "$1"
+	else
+		echo "Please install youtube-dl for downloading URLs"
+	fi
+}
