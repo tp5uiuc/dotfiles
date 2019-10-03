@@ -2,7 +2,7 @@
 
 [![License][lb]][ll]
 [![Pipeline Status][pb]][pl]
-[![Powered by Antibody][ab]][ap]
+[![Powered by Antibody][ab]][al]
 
 > Personal configuration files for *sh, Editors, Tmux, Terminals and more.
 
@@ -11,10 +11,10 @@
 [lb]: https://img.shields.io/badge/license-MIT-blue.svg
 [ll]: https://gitlab.com/parthas1/dotfiles/blob/master/LICENSE.md
 [ab]: https://img.shields.io/badge/powered%20by-antibody-blue.svg?style=flat-square
-[ap]: https://github.com/getantibody/antibody
+[al]: https://github.com/getantibody/antibody
 [pb]: https://gitlab.com/parthas1/dotfiles/badges/master/pipeline.svg
-[pp]: https://gitlab.com/parthas1/dotfiles/commits/master
-[scrn1]: /docs/screenshot.png
+[pl]: https://gitlab.com/parthas1/dotfiles/commits/master
+[scrn1]: /.docs/screenshot.png
 
 ## Installation
 

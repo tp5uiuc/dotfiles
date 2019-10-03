@@ -1,13 +1,13 @@
-image: alpine
+image: frapsoft/zsh
 
 stages:
   - build
 
 linux_build:
   stage: build
-  before_script:
-    - apt-get update >/dev/null
-    - apt-get install -y zsh
+  # before_script:
+  #   - apt-get update >/dev/null
+  #   - apt-get install -y zsh
   script:
     - make ci
   when: always
