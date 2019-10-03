@@ -6,8 +6,8 @@ stages:
 linux_build:
   stage: build
   before_script:
-    - sudo apt-get update >/dev/null
-    - sudo apt-get install -y zsh
+    - apt-get update >/dev/null
+    - apt-get install -y zsh
   script:
     - make ci
   when: always
