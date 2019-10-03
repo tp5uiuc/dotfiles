@@ -12,7 +12,7 @@ alias -- -="cd -"
 alias d='dirs -v | head -10'
 
 # VirtuaCop
-alias reload!='exec "$SHELL" -l'
+alias reloadconfig='exec "$SHELL" -l'
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
