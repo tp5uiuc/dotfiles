@@ -16,6 +16,7 @@ prompt_git() {
 	local branchName=''
 
 	# Check if the current directory is in a Git repository.
+	# shellcheck disable=SC2139,SC2046
 	if [ $(
 		git rev-parse --is-inside-work-tree &>/dev/null
 		echo "${?}"
@@ -28,11 +29,13 @@ prompt_git() {
 			git update-index --really-refresh -q &>/dev/null
 
 			# Check for uncommitted changes in the index.
+			# shellcheck disable=SC2091
 			if ! $(git diff --quiet --ignore-submodules --cached); then
 				s+='+'
 			fi
 
 			# Check for unstaged changes.
+			# shellcheck disable=SC2091
 			if ! $(git diff-files --quiet --ignore-submodules --); then
 				s+='!'
 			fi
@@ -43,6 +46,7 @@ prompt_git() {
 			fi
 
 			# Check for stashed files.
+			# shellcheck disable=SC2091
 			if $(git rev-parse --verify refs/stash &>/dev/null); then
 				s+='$'
 			fi
@@ -82,15 +86,25 @@ if tput setaf 1 &>/dev/null; then
 else
 	bold=''
 	reset="\e[0m"
+	# shellcheck disable=SC2034
 	black="\e[1;30m"
+	# shellcheck disable=SC2034
 	blue="\e[1;34m"
+	# shellcheck disable=SC2034
 	cyan="\e[1;36m"
+	# shellcheck disable=SC2034
 	green="\e[1;32m"
+	# shellcheck disable=SC2034
 	orange="\e[1;33m"
+	# shellcheck disable=SC2034
 	purple="\e[1;35m"
+	# shellcheck disable=SC2034
 	red="\e[1;31m"
+	# shellcheck disable=SC2034
 	violet="\e[1;35m"
+	# shellcheck disable=SC2034
 	white="\e[1;37m"
+	# shellcheck disable=SC2034
 	yellow="\e[1;33m"
 fi
 

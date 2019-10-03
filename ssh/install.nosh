@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-function version(){
+version() {
 	echo "$@" | awk -F'.' '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'
 }
 
@@ -10,7 +10,7 @@ if [ "$(uname -s)" = "Darwin" ]; then #MacOS
 
 	# For newer versions of MacOS, we need slightly different formulae
 	# See https://superuser.com/a/1155833
-	if [ $(version ${macos_version}) -ge $(version "10.12.2") ]; then
+	if [ "$(version "${macos_version}")" -ge "$(version "10.12.2")" ]; then
 		config_file="config.macos.sierra"
 	else
 		config_file="config.macos.elcapitan"
