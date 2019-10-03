@@ -120,7 +120,8 @@ additional-builtins=
 [FORMAT]
 
 # Maximum number of characters on a single line.
-max-line-length=79
+# Set at 88 for compliance with black
+max-line-length=88
 
 # Maximum number of lines in a module
 max-module-lines=1000
