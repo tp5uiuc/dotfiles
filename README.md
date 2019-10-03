@@ -10,7 +10,7 @@
 
 [lb]: https://img.shields.io/badge/license-MIT-blue.svg
 [ll]: https://gitlab.com/parthas1/dotfiles/blob/master/LICENSE.md
-[ab]: https://img.shields.io/badge/powered%20by-antibody-blue.svg?style=flat-square
+[ab]: https://img.shields.io/badge/powered%20by-antibody-blue.svg
 [al]: https://github.com/getantibody/antibody
 [pb]: https://gitlab.com/parthas1/dotfiles/badges/master/pipeline.svg
 [pl]: https://gitlab.com/parthas1/dotfiles/commits/master
