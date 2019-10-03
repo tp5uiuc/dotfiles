@@ -9,12 +9,12 @@ fmt:
 localcheck:
 	@shellcheck --version
 	@find . -type f -maxdepth 3 -name '*.sh' | while read -r src; do shellcheck -s sh -e SC1071 "$$src"; done
-	@find . -type f -maxdepth 3 \( -name '*.[z|b]**sh' ! -name 'prompt.bash' \) | while read -r src; do shellcheck -s bash -e SC1071 "$$src"; done;
+	@find . -type f -maxdepth 3 -name '*.[z|b]**sh' | while read -r src; do shellcheck -s bash -e SC1071,SC1117 "$$src"; done;
 
 check:
 	@curl -sL https://git.io/shcheck | bash -f -s -- \
 		--ignore='./vim/vim.symlink/**/*' \
-		--shellcheck-exclude=SC1071
+		--shellcheck-exclude=SC1071,SC1117
 
 ci: check
 	./script/test
