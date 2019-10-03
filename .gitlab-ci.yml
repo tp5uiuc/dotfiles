@@ -1,4 +1,4 @@
-image: frapsoft/zsh
+image: ubuntu:latest
 
 stages:
   - build
