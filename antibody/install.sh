@@ -9,7 +9,6 @@ install_bundles() {
 test -n "$CI" &&
 	curl -sL https://git.io/antibody | sh -s
 
-echo "$PATH"
 if command -v antibody >/dev/null 2>&1; then
 	install_bundles
 fi
