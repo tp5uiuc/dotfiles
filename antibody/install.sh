@@ -1,10 +1,16 @@
 #!/usr/bin/env sh
 
-# Build antibody only in CI environments
-test -n "$CI" &&
-	curl -sL https://git.io/antibody | sh -s
-
-if command -v antibody >/dev/null 2>&1; then
+install_bundles() {
 	antibody bundle <"$DOTFILES/antibody/bundles.txt" >~/.zsh_plugins.sh
 	antibody update
+}
+
+# Build antibody only in CI environments
+test -n "$CI" &&
+	curl -sL https://git.io/antibody | sh -s && install_bundles
+
+if command -v antibody >/dev/null 2>&1; then
+	install_bundles
 fi
+
+unset install_bundles
