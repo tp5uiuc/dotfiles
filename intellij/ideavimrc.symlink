@@ -1,1 +1,6 @@
-source ~/.vimrc
+"source ~/.vimrc"
+
+set surround
+set commentary
+set visualbell
+set noerrorbells
