@@ -7,8 +7,9 @@ install_bundles() {
 
 # Build antibody only in CI environments
 test -n "$CI" &&
-	curl -sL https://git.io/antibody | sh -s && install_bundles
+	curl -sL https://git.io/antibody | sh -s
 
+echo $PATH
 if command -v antibody >/dev/null 2>&1; then
 	install_bundles
 fi
