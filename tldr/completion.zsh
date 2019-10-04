@@ -6,7 +6,7 @@
 # TLDR_BASH="https://raw.githubusercontent.com/dbrgn/tealdeer/master/bash_tealdeer"
 TLDR_ZSH="https://raw.githubusercontent.com/dbrgn/tealdeer/master/zsh_tealdeer"
 
-if command -v tldr >/dev/null 2>&1; then # tealdeer exists
+if hash tldr 2>/dev/null; then # tealdeer exists
 
 	# Determine version
 	# tldr --version prints as tealdeer v1.2.0 (macOS / BSD)
