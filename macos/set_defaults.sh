@@ -40,7 +40,9 @@ osascript -e 'tell application "System Preferences" to quit'
 sudo -v
 
 while true; do
-  sudo -n true; sleep 60; kill -0 "$$" || exit;
+	sudo -n true
+	sleep 60
+	kill -0 "$$" || exit
 done 2>/dev/null &
 
 echo ""
@@ -67,7 +69,7 @@ chflags nohidden ~/Library
 echo "  › Show the /Volumes folder"
 sudo chflags nohidden /Volumes
 
-echo "  › Disable “natural” (Lion-style) scrolling"
+echo "  › Disable 'natural' (Lion-style) scrolling"
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
 echo "  › Set a really fast key repeat"
@@ -156,7 +158,6 @@ defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.5
 
 echo "  › Show battery percent"
 defaults write com.apple.menuextra.battery ShowPercent -bool true
-
 
 if [ ! -z "$TRAVIS_JOB_ID" ]; then
 	echo "  › Speed up wake from sleep to 24 hours from an hour"
@@ -275,6 +276,7 @@ defaults write com.apple.dock launchanim -bool false
 echo ""
 echo "› Mail:"
 echo "  › Add the keyboard shortcut CMD + Enter to send an email"
+# shellcheck disable=SC1117
 defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 echo "  › Add the keyboard shortcut CMD + Shift + E to archive an email"
 # shellcheck disable=SC2016
