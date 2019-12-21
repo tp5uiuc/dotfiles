@@ -62,7 +62,7 @@ unbind %
 #####################################
 #### APPEARANCE
 #####################################
-set -g default-terminal "screen-256color" # use 256 colors
+set -g default-terminal "xterm-256color" # use 256 colors
 setw -g aggressive-resize on # resize window to smallest client
 
 # Default background
