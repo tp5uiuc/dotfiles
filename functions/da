@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# Downloads All (da) of a particular file type from a specific base url
+
+# Usage : da <type of file> <base_url_to_download_from>
+da() {
+	mkd "dl_${1}" && wget --random-wait -A "${1}" -m -p -E -k -K -e robots=off -nd -np "${@:2}"
+	if [ $? -ne 0 ]; then
+		echo 'Not all files could be downloaded, trying to clean up ' && cd .. && rmdir -p "dl_${1}"; return 1;
+	fi
+}

@@ -140,3 +140,6 @@ alias C="tr -d '\\n' | pbcopy"
 
 # some useful cheatsheets
 alias cheattmux='o https://gist.github.com/MohamedAlaa/2961058'
+
+# some shortcuts for functions
+alias dap='da pdf'
