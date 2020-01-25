@@ -8,6 +8,9 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
+# make mv ask before overwriting a file by default
+alias mv="mv -i"
+
 # Easy directory change, adapted from https://opensource.com/article/18/9/tips-productivity-zsh
 alias d='dirs -v | head -10'
 
