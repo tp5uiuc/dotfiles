@@ -94,7 +94,16 @@ bindkey '^?' backward-delete-char
 # bindkey '^[[3~' backward-delete-word
 
 # delete word with alt+backspace
-bindkey '^[^?' backward-delete-word
+# Earlier this used to kill till freeline, now kill only till the /
+# character, similar to unix-filename-rubout in inputrc
+# Taken from https://unix.stackexchange.com/a/319854
+backward-kill-dir () {
+  local WORDCHARS=${WORDCHARS/\/}
+  zle backward-kill-word
+}
+zle -N backward-kill-dir
+bindkey '^[^?' backward-kill-dir
+# bindkey '^[^?' backward-delete-word
 
 # search history with fzf if installed, default otherwise
 if test -d /usr/local/opt/fzf/shell; then
