@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+# Open emacsclient if doesn't perist
+# Usage: `em <file_to_open>`
+function em() {
+	# Checks if there's a frame open
+	emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" 2>/dev/null | grep t &>/dev/null
+	if [ "$?" -eq "1" ]; then
+		emacsclient -a '' -ct "$@"
+	else
+		emacsclient -qt "$@"
+	fi
+}
