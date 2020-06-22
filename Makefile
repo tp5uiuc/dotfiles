@@ -14,7 +14,7 @@ localcheck:
 check:
 	@curl -sL https://git.io/shcheck | bash -f -s -- \
 		--ignore='./vim/vim.symlink/**/*' \
-		--shellcheck-exclude=SC1071,SC1117
+		--shellcheck-exclude=SC1071,SC1117,SC2039
 
 ci: check
 	./script/test
