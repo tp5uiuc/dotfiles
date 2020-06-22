@@ -97,9 +97,9 @@ bindkey '^?' backward-delete-char
 # Earlier this used to kill till freeline, now kill only till the /
 # character, similar to unix-filename-rubout in inputrc
 # Taken from https://unix.stackexchange.com/a/319854
-backward-kill-dir () {
-  local WORDCHARS=${WORDCHARS/\/}
-  zle backward-kill-word
+backward-kill-dir() {
+	local WORDCHARS=${WORDCHARS/\//}
+	zle backward-kill-word
 }
 zle -N backward-kill-dir
 bindkey '^[^?' backward-kill-dir
