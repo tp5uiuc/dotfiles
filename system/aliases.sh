@@ -23,7 +23,7 @@ alias path='echo -e ${PATH//:/\\n}'
 # Shortcuts
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias c="cd ~/code"
+alias co="cd ~/code"
 alias g="git"
 alias h="history"
 
