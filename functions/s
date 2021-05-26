@@ -4,9 +4,9 @@
 # opens the given location
 s() {
 	if [ $# -eq 0 ]; then
-		subl .
+		reattach-to-user-namespace subl .
 	else
-		subl "$@"
+		reattach-to-user-namespace subl "$@"
 	fi
 }
 
