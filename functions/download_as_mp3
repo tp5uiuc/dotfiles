@@ -3,27 +3,28 @@
 # download mp3s if needed
 function download_as_mp3() {
 	# usage : convert_to_mp3 URL
-    soundclound_seq="soundcloud.com"
-    youtube_seq="youtube.com"
-	if [[ $1 == *_"$soundcloud_seq"_* ]]
+	local soundcloud_seq="soundcloud"
+	local youtube_seq="youtube"
+	if
+		[[ $1 == *"$youtube_seq"* ]]
 	then
-	  # https://github.com/flyingrub/scdl
-	  if hash scdl 2>/dev/null; then
-		scdl -l "$1"
-	  else
-		echo "Please install scdl for downloading soundcloud URLs"
-	  fi
-	  echo "True"
-	elif [[ $1 == *_"$youtube_seq"_* ]]
+		# https://youtube-dl.org/
+		if hash youtube-dl 2>/dev/null; then
+			youtube-dl --extract-audio --audio-format mp3 "$1"
+		else
+			echo "Please install youtube-dl for downloading youtube URLs"
+		fi
+	elif
+		[[ $1 == *"${soundcloud_seq}"* ]]
 	then
-	  # https://youtube-dl.org/
-	  if hash youtube-dl 2>/dev/null; then
-		youtube-dl --extract-audio --audio-format mp3 "$1"
-	  else
-		echo "Please install youtube-dl for downloading youtube URLs"
-	  fi
+		# https://github.com/flyingrub/scdl
+		if hash scdl 2>/dev/null; then
+			scdl -l "$1"
+		else
+			echo "Please install scdl for downloading soundcloud URLs"
+		fi
 	else
-	  echo "Unrecognized link from neither Soundcloud nor Youtube"
+		echo "Unrecognized link from neither Soundcloud nor Youtube"
 	fi
 
 }
