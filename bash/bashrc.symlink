@@ -4,4 +4,5 @@ export DOTFILES="$HOME/.dotfiles"
 # echo "echoed ${DOTFILES}"
 # export logic to profile
 # [ -n "$PS1" ] && source ~/.bash_profile;
-# source ~/.bash_profile;
+# needed for macos to correctly launch
+source ~/.bash_profile;
