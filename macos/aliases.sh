@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 if [ "$(uname -s)" != "Darwin" ]; then
-	exit 0
+	return 0
 fi
 
 alias airport="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
