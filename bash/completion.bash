@@ -8,15 +8,15 @@ if command -v brew &>/dev/null && [ -f "$(brew --prefix)/etc/profile.d/bash_comp
 	# CHANGELOG : updated the following path based on new Linux distros
 elif [ -f /usr/share/bash-completion/bash_completion ]; then
 	# shellcheck source=/dev/null
-  source /usr/share/bash-completion/bash_completion
+	source /usr/share/bash-completion/bash_completion
 fi
 
 # Enable tab completion for `g` by marking it as an alias for `git`
 # CHANGELOG : complete -o default -o nospace -F doesnt seem to work
 # see https://stackoverflow.com/a/15009611, so switched to using
 # git-core helpers
-if type __git_complete &>/dev/null ; then
-  __git_complete g __git_main
+if type __git_complete &>/dev/null; then
+	__git_complete g __git_main
 fi
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
