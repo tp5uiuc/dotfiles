@@ -19,7 +19,8 @@ export PATH
 export PROJECTS="$HOME/code"
 
 # your default editor
-export EDITOR='nvim'
+# CHANGLEOG : nv is a defined in _functions, some systems doesnt have nvim
+export EDITOR='nv'
 export VEDITOR='subl'
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
