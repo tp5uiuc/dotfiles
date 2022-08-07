@@ -1,17 +1,28 @@
 #!/usr/bin/env sh
 
 pathmunge() {
-	if ! echo "$PATH" | grep -Eq "(^|:)$1($|:)"; then
-		if [ "$2" = "after" ]; then
-			PATH="$PATH:$1"
-		else
-			PATH="$1:$PATH"
-		fi
+  if ! echo "$PATH" | grep -Eq "(^|:)$1($|:)"; then
+	if [ "$2" = "after" ]; then
+	  PATH="$PATH:$1"
+	else
+	  PATH="$1:$PATH"
 	fi
+  fi
 }
 
-pathmunge "/usr/local/sbin" after
-pathmunge "/usr/local/bin"
+case $(uname -m) in
+	'x86_64')
+		# Intel Mac
+		pathmunge "/usr/local/sbin" after
+		pathmunge "/usr/local/bin"
+		;;
+	'arm64')
+		# M1 Mac or newer
+		pathmunge "/opt/homebrew/bin"
+		pathmunge "/opt/homebrew/sbin" after
+		;;
+esac
+
 pathmunge "$DOTFILES/bin"
 export PATH
 
