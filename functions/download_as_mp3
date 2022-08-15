@@ -5,15 +5,16 @@ function download_as_mp3() {
 	# usage : convert_to_mp3 URL
 	local soundcloud_seq="soundcloud"
 	local youtube_seq="youtube"
-	if
-		[[ $1 == *"$youtube_seq"* ]]
-	then
-		# https://youtube-dl.org/
-		if hash youtube-dl 2>/dev/null; then
-			youtube-dl --extract-audio --audio-format mp3 "$1"
+	if [[ $1 == *"$youtube_seq"* ]]; then
+		if hash yt-dlp 2>/dev/null; then
+			local ytcmd="yt-dlp"
+		elif hash youtube-dl 2>/dev/null; then
+			# https://youtube-dl.org/
+			local ytcmd="youtube-dl"
 		else
-			echo "Please install youtube-dl for downloading youtube URLs"
+			echo "Please install yt-dlp or youtube-dl for downloading youtube URLs"
 		fi
+		${ytcmd} --extract-audio --audio-format mp3 "$1"
 	elif
 		[[ $1 == *"${soundcloud_seq}"* ]]
 	then
