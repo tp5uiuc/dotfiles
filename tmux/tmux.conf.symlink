@@ -66,7 +66,7 @@ set -g default-terminal "xterm-256color" # use 256 colors
 setw -g aggressive-resize on # resize window to smallest client
 
 # Default background
-set -g status-bg default
+set -g status-bg black
 # Highlight active window to red
 # set-window-option -g window-status-current-bg red
 
