@@ -11,6 +11,24 @@ elif [ -f /usr/share/bash-completion/bash_completion ]; then
 	source /usr/share/bash-completion/bash_completion
 fi
 
+if ! declare -f __git_complete &>/dev/null; then
+	#Notes:
+	#* __git_complete (defined in https://github.com/git/git/blob/master/contrib/completion/git-completion.bash#L3496-L3505)
+	# is not public and is loaded by bash_completion dynamically on demand
+	#* If __git_complete are not defined, then __git_complete_command and __gitcompappend are also undefined
+	#* Solution is to source git completions (from one of these common locations)
+	if [ -e /usr/share/bash-completion/completions/git ]; then
+		# shellcheck disable=SC1091
+		. /usr/share/bash-completion/completions/git
+	elif [ -f /usr/local/share/bash-completion/completions/git ]; then
+		# shellcheck disable=SC1091
+		. /usr/local/share/bash-completion/completions/git
+	elif [ -e /etc/bash_completion.d/git ]; then
+		# shellcheck disable=SC1091
+		. /etc/bash_completion.d/git
+	fi
+fi
+
 # Enable tab completion for `g` by marking it as an alias for `git`
 # CHANGELOG : complete -o default -o nospace -F doesnt seem to work
 # see https://stackoverflow.com/a/15009611, so switched to using
