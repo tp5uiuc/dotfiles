@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# `gpu_sm` returns the current compute capability of the GPU
+# if there is one
+# given location
+
+function gpu_sm() {
+	local cmd=""
+	if hash nvidia-smi 2>/dev/null; then
+		cmd="nvidia-smi --query-gpu=name,compute_cap --format=csv"
+	else
+		cmd="echo nvidia-smi not installed!"
+	fi
+	${cmd} "$@"
+}
+
+# gpu_sm "$@"
