@@ -108,18 +108,7 @@ bind -T copy-mode-vi v send -X begin-selection  # start "visual" with v
 bind -T copy-mode-vi V send -X select-line;
 bind -T copy-mode-vi 'r' send -X rectangle-toggle;
 
-# enable reattach-to-user-namespace which fixes pasteboard access and launchctl on Mac
-# Copy (yank) with y
-if-shell 'uname | grep -qi Linux && which xclip > /dev/null' 'bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "DISPLAY=:0 xclip -i -sel clipboard"'
-if-shell 'uname | grep -qi Darwin' 'bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"'
-if-shell 'uname | grep -qi Cygwin' 'bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "cat > /dev/clipboard"'
-
-# Paste with C-a p or M-p
-if-shell 'uname | grep -qi Linux && which xclip > /dev/null' 'bind p run "DISPLAY=:0 xclip -o | tmux load-buffer - ; tmux paste-buffer"'
-if-shell 'uname | grep -qi Darwin && which reattach-to-user-namespace > /dev/null' 'bind p run "pbpaste | tmux load-buffer - ; tmux paste-buffer"'
-if-shell 'uname | grep -qi Darwin' 'bind -n M-p run "pbpaste | tmux load-buffer - ; tmux paste-buffer"'
-if-shell 'uname | grep -qi Cygwin' 'bind p run "cat /dev/clipboard | tmux load-buffer - ; tmux paste-buffer"'
-if-shell 'uname | grep -qi Cygwin' 'bind -n M-p run "cat /dev/clipboard | tmux load-buffer - ; tmux paste-buffer"'
+# tmux-yank plugin takes care of the rest of the copy-paste logic.
 
 #####################################
 #### PLUGINS
@@ -150,6 +139,10 @@ set -g @continuum-save-interval '30'
 # Show continiuum state in statusbar
 # set -g status-right 'Continuum status: #{continuum_status}'
 # Starting tmux with system https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
+
+# tmux-yank - OS independent configurations for yanking
+# Needs xsel/xclip on linux and reattach-to-user-namespace on macos
+set -g @plugin 'tmux-plugins/tmux-yank'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/.tmux/plugins/tpm/tpm'
