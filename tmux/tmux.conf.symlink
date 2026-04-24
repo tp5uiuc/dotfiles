@@ -2,7 +2,7 @@
 #### GENERAL
 #####################################
 set -g mouse on # enable mouse (tmux 2.1+)
-set -g history-limit 5000 # lines to keep in hisoty
+set -g history-limit 100000 # lines to keep in hisoty
 set -g base-index 1 # start window numbering at 1
 set -g pane-base-index 1 # start pane numbering at 1
 set -g renumber-windows on # renumber windows automatically
@@ -62,7 +62,9 @@ unbind %
 #####################################
 #### APPEARANCE
 #####################################
-set -g default-terminal "xterm-256color" # use 256 colors
+set -g default-terminal "tmux-256color" # tell apps they're inside tmux
+set -as terminal-features ",xterm-256color:RGB" # advertise truecolor to apps
+set -as terminal-features ",*:hyperlinks"       # pass OSC 8 hyperlinks through
 setw -g aggressive-resize on # resize window to smallest client
 
 # Default background
@@ -109,6 +111,8 @@ bind -T copy-mode-vi V send -X select-line;
 bind -T copy-mode-vi 'r' send -X rectangle-toggle;
 
 # tmux-yank plugin takes care of the rest of the copy-paste logic.
+
+set -s set-clipboard on
 
 #####################################
 #### PLUGINS
