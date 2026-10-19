@@ -149,4 +149,8 @@ set -g @continuum-save-interval '30'
 set -g @plugin 'tmux-plugins/tmux-yank'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-run -b '~/.tmux/plugins/tpm/tpm'
+# Bootstrap tpm on a fresh machine. Without this, a missing tpm makes the `run`
+# below fail silently and leaves prefix+I unbound, so installs appear to do nothing.
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+run '~/.tmux/plugins/tpm/tpm'
